@@ -27,10 +27,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     TileManeger tileM = new TileManeger(this);
     KeyHandler keyH = new KeyHandler();
-    Sound sound = new Sound();
-    Thread gameThread;
+    Sound music = new Sound();
+    Sound se = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+    Thread gameThread;
 
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[10];
@@ -111,6 +113,8 @@ public class GamePanel extends JPanel implements Runnable{
 
         player.draw(g2);
 
+        ui.draw(g2);
+
 
         g2.dispose();
 
@@ -118,15 +122,15 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
     public void playSE(int i){
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 }
