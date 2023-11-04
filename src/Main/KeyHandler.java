@@ -5,7 +5,14 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
+    GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, uprightPressed,upleftPressed, downrightPressed,downleftPressed;
+
+    boolean checkDrawTime = false;
+
+    public KeyHandler(GamePanel gp){
+        this.gp = gp;
+    }
     boolean Akey = false;
     boolean Skey = false;
     boolean Dkey = false;
@@ -73,6 +80,27 @@ public class KeyHandler implements KeyListener {
         if(Skey == true && Akey == true){
             downleftPressed = true;
         }
+
+        if (code == KeyEvent.VK_T){
+            if(checkDrawTime == false) {
+                checkDrawTime = true;
+            } else if (checkDrawTime == true) {
+                checkDrawTime = false;
+
+            }
+        }
+
+        if(code == KeyEvent.VK_P){
+            if(gp.gameState == gp.playState) {
+                gp.gameState = gp.pauseState;
+            }
+            else if (gp.gameState == gp.pauseState) {
+                gp.gameState = gp.playState;
+                
+            }
+        }
+
+
 
     }
 
