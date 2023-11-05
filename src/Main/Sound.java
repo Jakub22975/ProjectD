@@ -3,10 +3,12 @@ package Main;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
 public class Sound {
     Clip clip;
+    public FloatControl fc;
     URL soundURL[] = new URL[30];
 
     public Sound() {
@@ -22,6 +24,7 @@ public class Sound {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
+            fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 
         }catch(Exception e) {
 
@@ -29,6 +32,7 @@ public class Sound {
 
     }
     public void play() {
+        fc.setValue(-25.0f);
         clip.start();
 
     }
